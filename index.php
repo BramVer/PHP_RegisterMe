@@ -5,19 +5,17 @@
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     </head>
     <body>
-        <h1>Blog title</h1>
-        <p>This paragraph summarises what the blog is about.</p>
-        <h2>Article 1 title</h2>
+
+      <?php for ($postID = 1; $postID <= 3; ++$postID): ?>
+        <h2>Article <?php echo $postID ?> title </h2>
         <div>dd Mon YYYY</div>
-        <p>A paragraph summarising article 1.</p>
+
+        <p>A paragraph summarizing the article <?php echo $postID ?>.</p>
         <p>
-            <a href="#">Read more...</a>
+          <a href='#'>READ MOREMRE...</a>
         </p>
-        <h2>Article 2 title</h2>
-        <div>dd Mon YYYY</div>
-        <p>A paragraph summarising article 2.</p>
-        <p>
-            <a href="#">Read more...</a>
-        </p>
+
+      <?php endfor ?>
+
     </body>
 </html>
