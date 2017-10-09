@@ -9,6 +9,10 @@
   $pdo = getPDO();
   $row = getPostRow($pdo, $postID);
 
+  // If no post exists, redirectAndExit()
+  if(!$row)
+    redirectAndExit('index.php?not-found=1');
+
   // Swap carriage returns for paragraph breaks
   $bodyText = htmlEscape($row['body']);
   $paraText = str_replace('\n', '<p><p/>', $bodyText);

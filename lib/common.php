@@ -97,4 +97,19 @@ function getCommentsForPost($postID)
 
   return $stmt -> fetchAll(PDO::FETCH_ASSOC);
 }
+
+function redirectAndExit($script)
+{
+  // Get domain-relative url and work out dir
+  $relativeURL = $_SERVER['PHP_SELF'];
+  $urlFolder = substr($relativeURL, 0, strrpos($relativeURL, '/') + 1);
+
+  // Redirect to full URL
+  $host = $_SERVER['HTTP_HOST'];
+  $fullURL = 'http://' . $host . $urlFolder . $script;
+
+  header('Location: ' . $fullURL);
+  exit();
+}
+
 ?>
