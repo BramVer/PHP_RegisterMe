@@ -58,6 +58,17 @@ function convertSQLDate($sqlDate)
 }
 
 /**
+ * Converts unsafe text to safe, paragraphed, HTML
+ *
+ * @param string $text
+ * @return string
+ */
+function convertNewLinesToParagraphs($text)
+{
+  return '<p>' . str_replace('\n', '</p><p>', htmlEscape($text)) . '</p>';
+}
+
+/**
  * Returns the number of comments for the specified post
  *
  * @param integer $postId

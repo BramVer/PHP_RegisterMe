@@ -27,10 +27,14 @@
     if(!$errors)
       redirectAndExit('view-post.php?post_id=' . $postID);
   }
-
-  // Swap carriage returns for paragraph breaks
-  $bodyText = htmlEscape($row['body']);
-  $paraText = str_replace('\n', '<p><p/>', $bodyText);
+  else
+  {
+    $commentData = array(
+      'name' => '',
+      'website' => '',
+      'text' => '',
+    )
+  }
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +58,7 @@
         </div>
 
         <p>
-          <?php echo $paraText ?>
+          <?php echo convertNewLinesToParagraphs($row['body']) ?>
         </p>
 
         <h3>
@@ -73,7 +77,7 @@
             </div>
 
             <div class='comment-body'>
-              <?php echo htmlEscape($comment['text']) ?>
+              <?php echo  convertNewLinesToParagraphs($comment['text']) ?>
             </div>
           </div>
         <?php endforeach ?>
