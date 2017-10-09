@@ -76,12 +76,12 @@ function convertNewLinesToParagraphs($text)
 /**
  * Returns the number of comments for the specified post
  *
+ * @param PDO $pdo
  * @param integer $postId
  * @return integer
  */
-function countCommentsForPost($postID)
+function countCommentsForPost(PDO $pdo, $postID)
 {
-  $pdo = getPDO();
   $sql = "SELECT COUNT(*) c
           FROM comment
           WHERE post_id = :postid";
@@ -97,11 +97,11 @@ function countCommentsForPost($postID)
 /**
  * Returns all the comments for the specified post
  *
+ * @param PDO $pdo
  * @param integer $postId
  */
-function getCommentsForPost($postID)
+function getCommentsForPost($pdo, $postID)
 {
-  $pdo = getPDO();
   $sql = "SELECT id, name, text, created_at, website
           FROM comment
           WHERE post_id = :post_id";

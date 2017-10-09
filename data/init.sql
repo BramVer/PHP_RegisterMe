@@ -2,6 +2,20 @@
   * Database creation script
   */
 
+/* Foreign key constraints need to be explicitly enabled in SQLite */
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username VARCHAR NOT NULL,
+    password VARCHAR NOT NULL,
+    created_at VARCHAR NOT NULL,
+    is_enabled BOOLEAN NOT NULL DEFAULT true
+);
+
+
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE post (
@@ -10,7 +24,8 @@ CREATE TABLE post (
   body VARCHAR NOT NULL,
   user_id INTEGER NOT NULL,
   created_at VARCHAR NOT NULL,
-  updated_at VARCHAR
+  updated_at VARCHAR,
+  FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 INSERT INTO post (
@@ -59,7 +74,8 @@ CREATE TABLE comment(
   created_at VARCHAR NOT NULL,
   name VARCHAR NOT NULL,
   website VARCHAR,
-  text VARCHAR NOT NULL
+  text VARCHAR NOT NULL,
+  FOREIGN KEY (post_id) REFERENCES post(id)
 );
 
 INSERT INTO comment(
@@ -88,14 +104,4 @@ INSERT INTO comment(
   "BENIS",
   "http://benis.com",
   "This is a funny name hihi"
-);
-
-DROP TABLE IF EXISTS user;
-
-CREATE TABLE user (
-	id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-	username VARCHAR NOT NULL,
-	password VARCHAR NOT NULL,
-	created_at VARCHAR NOT NULL,
-	is_enabled BOOLEAN NOT NULL DEFAULT true
 );

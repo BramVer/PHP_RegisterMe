@@ -51,38 +51,33 @@
     <body>
         <?php require 'templates/title.php' ?>
 
-        <h2>
-            <?php echo htmlEscape($row['title']) ?>
-        </h2>
-
-        <div>
-            <?php echo convertSQLDate($row['created_at']) ?>
-        </div>
-
-        <p>
-          <?php echo convertNewLinesToParagraphs($row['body']) ?>
-        </p>
-
-        <h3>
-          <?php echo countCommentsForPost($postID) ?>
-           comments
-        </h3>
-
-        <?php foreach(getCommentsForPost($postID) as $comment): ?>
-          <hr/>
-          <div class='comment'>
-            <div class='comment-meta'>
-              Comment from
-              <?php echo htmlEscape($comment['name']) ?>
-              on
-              <?php echo convertSQLDate($comment['created_at']) ?>
-            </div>
-
-            <div class='comment-body'>
-              <?php echo  convertNewLinesToParagraphs($comment['text']) ?>
-            </div>
-          </div>
-        <?php endforeach ?>
+        <div class="post">
+           <h2>
+               <?php echo htmlEscape($row['title']) ?>
+           </h2>
+           <div class="date">
+               <?php echo convertSqlDate($row['created_at']) ?>
+           </div>
+           <?php // This is already escaped, so doesn't need further escaping ?>
+           <?php echo convertNewlinesToParagraphs($row['body']) ?>
+       </div>
+       <div class="comment-list">
+           <h3><?php echo countCommentsForPost($postId) ?> comments</h3>
+           <?php foreach (getCommentsForPost($postId) as $comment): ?>
+               <div class="comment">
+                   <div class="comment-meta">
+                       Comment from
+                       <?php echo htmlEscape($comment['name']) ?>
+                       on
+                       <?php echo convertSqlDate($comment['created_at']) ?>
+                   </div>
+                   <div class="comment-body">
+                       <?php // This is already escaped ?>
+                       <?php echo convertNewlinesToParagraphs($comment['text']) ?>
+                   </div>
+               </div>
+           <?php endforeach ?>
+       </div>
 
         <?php require 'templates/comment-form.php' ?>
     </body>
