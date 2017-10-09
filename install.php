@@ -39,15 +39,20 @@
   }
 
   // See how many rows we created, if any
-  $count = null;
-  if(!$error)
-  {
-    $sql = "SELECT COUNT(*) AS c FROM post;";
-    $stmt = $pdo -> query($sql);
+  $count = array();
 
-    if($stmt)
-      $count = $stmt -> fetchColumn();
+  foreach(array('post', 'comment') as $tableName)
+  {
+    if(!$error)
+    {
+      $sql = "SELECT COUNT(*) AS c FROM " . $tableName;
+      $stmt = $pdo -> query($sql);
+
+      if($stmt)
+        $count[$tableName] = $stmt -> fetchColumn();
+    }
   }
+
  ?>
 
 
@@ -79,9 +84,17 @@
       <?php else: ?>
         <div class='success box'>
           The DB and demodata were created okay.
-          <?php if($count): ?>
-            <?php echo $count ?> new rows were created.
-          <?php endif ?>
+
+          <?php foreach(array('post', 'comment') as $tableName): ?>
+            <?php if(isset($count[$tableName])): ?>
+
+              <?php echo $count[$tableName] ?>
+              new
+              <?php echo $tableName ?>
+              were created.
+
+            <?php endif ?>
+          <?php endforeach ?>
         </div>
       <?php endif ?>
      </body>

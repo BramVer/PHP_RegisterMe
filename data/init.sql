@@ -50,3 +50,42 @@ INSERT INTO post (
   1,
   date('now', '-13 days')
 );
+
+DROP TABLE IF EXISTS comment;
+
+CREATE TABLE comment(
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  post_id INTEGER NOT NULL,
+  created_at VARCHAR NOT NULL,
+  name VARCHAR NOT NULL,
+  website VARCHAR,
+  text VARCHAR NOT NULL
+);
+
+INSERT INTO comment(
+  post_id,
+  created_at,
+  name,
+  website,
+  text
+) VALUES (
+  1,
+  date('now', '-10 days'),
+  "Jimminy Cricket",
+  "http://example.com",
+  "This is Cricket's contribution yesss"
+);
+
+INSERT INTO comment(
+  post_id,
+  created_at,
+  name,
+  website,
+  text
+) VALUES (
+  1,
+  date('now', '-8 days'),
+  "BENIS",
+  "http://benis.com",
+  "This is a funny name hihi"
+);
