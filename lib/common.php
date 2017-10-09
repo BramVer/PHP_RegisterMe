@@ -49,6 +49,11 @@ function htmlEscape($html)
     return htmlspecialchars($html, ENT_HTML5, 'UTF-8');
 }
 
+function getSQLDateForNow()
+{
+  return date('Y-m-d H:i:s');
+}
+
 function convertSQLDate($sqlDate)
 {
   /* @var $date DateTime */

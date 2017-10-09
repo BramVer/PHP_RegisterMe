@@ -9,7 +9,8 @@
   if($_POST)
   {
     // Install
-    list($_SESSION['count'], $_SESSION['error']) = installBlog();
+    $pdo = getPDO();
+    list($_SESSION['count'], $_SESSION['error']) = installBlog($pdo);
 
     // Redirect from POST to GET
     redirectAndExit('install.php');

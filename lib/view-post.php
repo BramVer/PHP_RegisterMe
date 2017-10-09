@@ -34,6 +34,7 @@
    * @param PDO $pdo
    * @param integer $postID
    * @param array $commentData
+   *
    * @return array
    */
   function addCommentToPost(PDO $pdo, $postID, array $commentData)
@@ -58,10 +59,8 @@
       if($stmt === false)
         throw new Exception('Cannot prepare insert statement.');
 
-      $createdTimestamp = date('Y-m-d H:m:s');
-
       $result = $stmt -> execute(
-        array_merge($commentData, array('post_id' => $postID, 'created_at' => $createdTimestamp))
+        array_merge($commentData, array('post_id' => $postID, 'created_at' => getSQLDateForNow(), ))
       );
 
       if($result === false)
@@ -71,6 +70,7 @@
           $errors[] = $errorInfo[2];
       }
     }
+
     return $errors;
   }
 ?>
