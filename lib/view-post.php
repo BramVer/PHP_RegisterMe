@@ -50,16 +50,18 @@
     if(!$errors)
     {
       $sql = "INSERT INTO comment
-              (name, website, text, post_id)
+              (name, website, text, created_at, post_id)
               VALUES
-              (:name, :website, :text, :post_id)";
+              (:name, :website, :text, :created_at, :post_id)";
 
       $stmt = $pdo -> prepare($sql);
       if($stmt === false)
         throw new Exception('Cannot prepare insert statement.');
 
+      $createdTimestamp = datetime('Y-m-d H:m:s')
+
       $result = $stmt -> execute(
-        array_merge($commentData, array('post_id' => $postID, ))
+        array_merge($commentData, array('post_id' => $postID, 'created_at' => $createdTimestamp))
       );
 
       if($result === false)
