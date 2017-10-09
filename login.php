@@ -31,13 +31,13 @@
       <title>
           A blog application | Login
       </title>
-      <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+      <?php require 'templates/head.php' ?>
   </head>
   <body>
     <?php require 'templates/title.php' ?>
 
     <?php if($username): ?>
-      <div style='border: 1px solid #ff6666; padding: 6px;'>
+      <div class='error box'>
         Username or pwd is incorrect, please try again.
       </div>
     <?php endif ?>

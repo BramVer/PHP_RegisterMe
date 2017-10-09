@@ -51,20 +51,7 @@
  <html>
      <head>
          <title>Blog installer</title>
-         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-         <style type="text/css">
-             .box {
-                 border: 1px dotted silver;
-                 border-radius: 5px;
-                 padding: 4px;
-             }
-             .error {
-                 background-color: #ff6666;
-             }
-             .success {
-                 background-color: #88ff88;
-             }
-         </style>
+         <?php require 'templates/head.php' ?>
      </head>
      <body>
       <?php if ($attempted): ?>
@@ -86,7 +73,7 @@
                 <?php endforeach ?>
 
                 The new '<?php echo htmlEscape($username) ?>' password is
-                <span>
+                <span class/'install-password'>
                   <?php echo htmlEscape($password) ?>
                 </span>
             </div>

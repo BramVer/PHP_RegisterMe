@@ -8,7 +8,7 @@
 <hr/>
 
 <?php if($errors): ?>
-  <div style='borders: 1px solid #ff6666; padding: 6px;'>
+  <div class='error box'>
     <ul>
       <?php foreach($errors as $e): ?>
         <li><?php echo $e ?></li>
