@@ -24,7 +24,7 @@ INSERT INTO post (
 
   Gurl look at dat body..",
   1,
-  date('now', '-2 months')
+  date('now', '-2 months', '-45 minutes', '+10 seconds')
 );
 
 INSERT INTO post (
@@ -36,7 +36,7 @@ INSERT INTO post (
   "Papa pizza, wat-een-e lekker-e post-afilioneee",
   "wowie nice zo jaaaaaha dat body..",
   1,
-  date('now', '-40 days')
+  date('now', '-40 days', '+815 minutes', '+37 seconds')
 );
 
 INSERT INTO post (
@@ -48,7 +48,7 @@ INSERT INTO post (
   "Pardone mascarpone",
   "Don Corleone, et was ni express-zo-nee",
   1,
-  date('now', '-13 days')
+  date('now', '-13 days', '+815 minutes', '+37 seconds')
 );
 
 DROP TABLE IF EXISTS comment;
@@ -70,7 +70,7 @@ INSERT INTO comment(
   text
 ) VALUES (
   1,
-  date('now', '-10 days'),
+  date('now', '-10 days', '+815 minutes', '+37 seconds'),
   "Jimminy Cricket",
   "http://example.com",
   "This is Cricket's contribution yesss"
@@ -84,7 +84,7 @@ INSERT INTO comment(
   text
 ) VALUES (
   1,
-  date('now', '-8 days'),
+  date('now', '-8 days', '+815 minutes', '+37 seconds'),
   "BENIS",
   "http://benis.com",
   "This is a funny name hihi"
