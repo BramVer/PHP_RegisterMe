@@ -31,6 +31,7 @@
 
         <div>
           <?php echo convertSQLDate($row['created_at']) ?>
+          (<?php echo countCommentsForPost($row['id']) ?> comments)
         </div>
 
         <p>

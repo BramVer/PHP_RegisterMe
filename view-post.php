@@ -54,7 +54,28 @@
         </div>
 
         <p>
-            <?php echo htmlEscape($row['body']) ?>
+          <?php echo $paraText ?>
         </p>
+
+        <h3>
+          <?php echo countCommentsForPost($postID) ?>
+           comments
+        </h3>
+
+        <?php foreach(getCommentsForPost($postID) as $comment): ?>
+          <hr/>
+          <div class='comment'>
+            <div class='comment-meta'>
+              Comment from
+              <?php echo htmlEscape($comment['name']) ?>
+              on
+              <?php echo convertSQLDate($comment['created_at']) ?>
+            </div>
+
+            <div class='comment-body'>
+              </<?php echo htmlEscape($comment['text']) ?>
+            </div>
+          </div>
+        <?php endforeach ?>
     </body>
 </html>
