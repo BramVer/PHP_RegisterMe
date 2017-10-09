@@ -31,7 +31,7 @@
     <label for='comment-text'>
       Comment:
     </label>
-    <textarea id='comment-text' name='comment-text' rows='8' cols='70'/>
+    <textarea id='comment-text' name='comment-text' rows='8' cols='70'></textarea>
   </p>
 
   <input type='submit' value='Submit comment'/>

@@ -32,7 +32,7 @@
    * Writes a comment to a particular post
    *
    * @param PDO $pdo
-   * @param integer $postId
+   * @param integer $postID
    * @param array $commentData
    * @return array
    */
@@ -58,7 +58,7 @@
       if($stmt === false)
         throw new Exception('Cannot prepare insert statement.');
 
-      $createdTimestamp = datetime('Y-m-d H:m:s')
+      $createdTimestamp = date('Y-m-d H:m:s');
 
       $result = $stmt -> execute(
         array_merge($commentData, array('post_id' => $postID, 'created_at' => $createdTimestamp))

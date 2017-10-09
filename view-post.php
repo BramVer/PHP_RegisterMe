@@ -25,7 +25,7 @@
     $errors = addCommentToPost($pdo, $postID, $commentData);
 
     if(!$errors)
-      redirectAndExit('view-post?post_id=' . $postID)
+      redirectAndExit('view-post.php?post_id=' . $postID);
   }
 
   // Swap carriage returns for paragraph breaks
@@ -73,7 +73,7 @@
             </div>
 
             <div class='comment-body'>
-              </<?php echo htmlEscape($comment['text']) ?>
+              <?php echo htmlEscape($comment['text']) ?>
             </div>
           </div>
         <?php endforeach ?>
