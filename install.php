@@ -13,7 +13,7 @@ if (is_readable($database) && filesize($database) > 0)
 // Create an empty file for the DB
 if(!$error)
 {
-  $createdOk = @touch($databse);
+  $createdOk = @touch($database);
   if(!$createdOk)
     $error = sprintf('Could not create DB, give server permission to edit location ' . dirname($database));
 }
@@ -21,7 +21,9 @@ if(!$error)
 // Grab the SQL commands we want to run on the DB
 if(!$error)
 {
-  if(file_get_contents($root . '/data/init.sql'))
+  $sql = file_get_contents($root . '/data/init.sql');
+
+  if($sql === false)
     $error = 'Cannot find SQL file.';
 }
 
@@ -39,7 +41,7 @@ if(!$error)
 $count = null;
 if(!$error)
 {
-  $sql = 'SELECT COUNT(*) AS c FROM post;'
+  $sql = "SELECT COUNT(*) AS c FROM post;";
   $stmt = $pdo -> query($sql);
 
   if($stmt)
