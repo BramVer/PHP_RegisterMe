@@ -15,14 +15,14 @@
     );
 
     if($stmt === false)
-      throw new Exception('Problem preparing the query.')
+      throw new Exception('Problem preparing the query.');
 
     $result = $stmt -> execute(
       array( 'id' => $postID, )
     );
 
     if($result === false)
-      throw new Exception('Problem running the query.')
+      throw new Exception('Problem running the query.');
 
     // Get and return a row
     return $stmt -> fetch(PDO::FETCH_ASSOC);

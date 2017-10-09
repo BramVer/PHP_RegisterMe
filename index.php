@@ -11,7 +11,7 @@
   );
 
   if($stmt === false)
-    throw new Exception('Problem running the query.')
+    throw new Exception('Problem running the query.');
 
   $notFound = isset($_GET['not-found']);
 ?>
