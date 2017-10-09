@@ -1,6 +1,6 @@
 <?php
   require_once 'lib/common.php';
-  require_once 'lib/install.php'
+  require_once 'lib/install.php';
 
   // Store stuff in the session to survive redirects
   session_start();
