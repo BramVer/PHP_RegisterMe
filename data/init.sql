@@ -89,3 +89,11 @@ INSERT INTO comment(
   "http://benis.com",
   "This is a funny name hihi"
 );
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  username VARCHAR NOT NULL,
+  password VARCHAR NOT NULL,
+  created_at VARCHAR NOT NULL,
+  is_enabled BOOLEAN NOT NULL DEFAULT true,
+);

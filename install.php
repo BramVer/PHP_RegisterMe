@@ -10,7 +10,20 @@
   {
     // Install
     $pdo = getPDO();
-    list($_SESSION['count'], $_SESSION['error']) = installBlog($pdo);
+    list($rowCounts, $error) = installBlog($pdo);
+
+    $password = '';
+    if(!$error)
+    {
+      $username = 'admin';
+      list($password, $error) = createUser($pdo, $username);
+    }
+
+    $_SESSION['count'] = $rowCounts;
+    $_SESSION['error'] = $error;
+    $_SESSION['username'] = $username;
+    $_SESSION['password'] = $password;
+    $_SESSION['try-install'] = $true;
 
     // Redirect from POST to GET
     redirectAndExit('install.php');
@@ -18,15 +31,19 @@
 
   // Check if install was triggered
   $attempted = false;
-  if($_SESSION)
+  if(isset($_SESSION['try-install']))
   {
     $attempted = true;
     $count = $_SESSION['count'];
     $error = $_SESSION['error'];
+    $username = $_SESSION['username'];
+    $password = $_SESSION['password'];
 
     // Unsert session vars, so we only report install/failure once
     unset($_SESSION['count']);
     unset($_SESSION['error']);
+    unset($_SESSION['username']);
+    unset($_SESSION['password']);
   }
  ?>
 
@@ -67,6 +84,11 @@
                         were created.
                     <?php endif ?>
                 <?php endforeach ?>
+
+                The new '<?php echo htmlEscape($username) ?>' password is
+                <span>
+                  <?php echo htmlEscape($password) ?>
+                </span>
             </div>
         <?php endif ?>
 
