@@ -34,7 +34,7 @@
     <head>
         <title>
             A blog application |
-            <?php echo htmlspecialchars($row['title'], ENT_HTML5, 'UTF-8') ?>
+            <?php echo htmlEscape($row['title']) ?>
         </title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     </head>
@@ -42,7 +42,7 @@
         <?php require 'templates/title.php' ?>
 
         <h2>
-            <?php echo htmlspecialchars($row['title'], ENT_HTML5, 'UTF-8') ?>
+            <?php echo htmlEscape($row['title']) ?>
         </h2>
 
         <div>
@@ -50,7 +50,7 @@
         </div>
 
         <p>
-            <?php echo htmlspecialchars($row['body'], ENT_HTML5, 'UTF-8') ?>
+            <?php echo htmlEscape($row['body']) ?>
         </p>
     </body>
 </html>
