@@ -27,6 +27,10 @@
 
   // Get a row
   $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+
+  // Swap carriage returns for paragraph breaks
+  $bodyText = htmlEscape($row['body']);
+  $paraText = str_replace('\n', '<p><p/>', $bodyText);
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +50,7 @@
         </h2>
 
         <div>
-            <?php echo $row['created_at'] ?>
+            <?php echo convertSQLDate($row['created_at']) ?>
         </div>
 
         <p>

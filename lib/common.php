@@ -48,4 +48,12 @@ function htmlEscape($html)
 {
     return htmlspecialchars($html, ENT_HTML5, 'UTF-8');
 }
+
+function convertSQLDate($sqlDate)
+{
+  /* @var $date DateTime */
+  $date = DateTime::createFromFormat('Y-m-d', $sqlDate);
+
+  return $date -> format('d M Y');
+}
 ?>

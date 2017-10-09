@@ -30,7 +30,7 @@
         </h2>
 
         <div>
-          <?php echo $row['created_at'] ?>
+          <?php echo convertSQLDate($row['created_at']) ?>
         </div>
 
         <p>
