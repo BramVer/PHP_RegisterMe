@@ -1,32 +1,13 @@
 <?php
   require_once 'lib/common.php';
+  require_once 'lib/view-post.php';
 
   // Get post ID
-  $postID = 0;
-
-  if(isset($_GET['post_id']))
-    $postID = $_GET['post_id'];
+  $postID = (isset($_GET['post_id'])) ? $_GET['post_id'] : 0;
 
   // Connect to DB
   $pdo = getPDO();
-  $stmt = $pdo -> prepare(
-    "SELECT title, created_at, body
-    FROM post
-    WHERE id = :id"
-  );
-
-  if($stmt === false)
-    throw new Exception('There was a problem preparing the query.');
-
-  $result = $stmt -> execute(
-    array('id' => $postID, )
-  );
-
-  if($result === false)
-    throw new Exception('There was a problem executing the query.');
-
-  // Get a row
-  $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+  $row = getPostRow($pdo, $postID);
 
   // Swap carriage returns for paragraph breaks
   $bodyText = htmlEscape($row['body']);
