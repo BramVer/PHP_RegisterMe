@@ -23,7 +23,7 @@
     $_SESSION['error'] = $error;
     $_SESSION['username'] = $username;
     $_SESSION['password'] = $password;
-    $_SESSION['try-install'] = $true;
+    $_SESSION['try-install'] = true;
 
     // Redirect from POST to GET
     redirectAndExit('install.php');
