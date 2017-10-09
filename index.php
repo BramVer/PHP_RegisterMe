@@ -1,6 +1,8 @@
 <?php
   require_once 'lib/common.php';
 
+  session_start();
+
   // Connect to DB
   $pdo = getPDO();
 
