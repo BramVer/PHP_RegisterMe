@@ -4,6 +4,12 @@
   $db = $root . '/data/data.sqlite';
   $dsn = 'sqlite:' . $db;
 
+  // Get post ID
+  $postID = 0;
+
+  if(isset($_GET['post_id']))
+    $postID = $_GET['post_id'];
+
   // Connect to DB
   $pdo = new PDO($dsn);
   $stmt = $pdo -> prepare(
@@ -16,7 +22,7 @@
     throw new Exception('There was a problem preparing the query.');
 
   $result = $stmt -> execute(
-    array('id' => 1, )
+    array('id' => $postID, )
   );
 
   if($result === false)
