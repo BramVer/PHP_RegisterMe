@@ -1,8 +1,5 @@
 <?php
-  // Work out path to DB for connection
-  $root = __DIR__;
-  $db = $root . '/data/data.sqlite';
-  $dsn = 'sqlite:' . $db;
+  require_once 'lib/common.php';
 
   // Get post ID
   $postID = 0;
@@ -11,7 +8,7 @@
     $postID = $_GET['post_id'];
 
   // Connect to DB
-  $pdo = new PDO($dsn);
+  $pdo = getPDO();
   $stmt = $pdo -> prepare(
     "SELECT title, created_at, body
     FROM post

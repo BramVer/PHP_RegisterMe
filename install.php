@@ -1,52 +1,53 @@
 <?php
-// Get the PDO DSN stringk
-$root = realpath(__DIR__);
-$database = $root . '/data/data.sqlite';
-$dsn = 'sqlite:' . $database;
+  require_once 'lib/common.php';
 
-$error = '';
+  // Get the PDO DSN string
+  $root = getRootPath();
+  $database = getDatabasePath();
 
-// A security measure, to avoid anyone resetting the DB if it exists
-if (is_readable($database) && filesize($database) > 0)
-  $error = 'Please delete existing DB manually before reinstalling.';
+  $error = '';
 
-// Create an empty file for the DB
-if(!$error)
-{
-  $createdOk = @touch($database);
-  if(!$createdOk)
-    $error = sprintf('Could not create DB, give server permission to edit location ' . dirname($database));
-}
+  // A security measure, to avoid anyone resetting the DB if it exists
+  if (is_readable($database) && filesize($database) > 0)
+    $error = 'Please delete existing DB manually before reinstalling.';
 
-// Grab the SQL commands we want to run on the DB
-if(!$error)
-{
-  $sql = file_get_contents($root . '/data/init.sql');
+  // Create an empty file for the DB
+  if(!$error)
+  {
+    $createdOk = @touch($database);
+    if(!$createdOk)
+      $error = sprintf('Could not create DB, give server permission to edit location ' . dirname($database));
+  }
 
-  if($sql === false)
-    $error = 'Cannot find SQL file.';
-}
+  // Grab the SQL commands we want to run on the DB
+  if(!$error)
+  {
+    $sql = file_get_contents($root . '/data/init.sql');
 
-// Connect to the new DB and try to run the SQL commands
-if(!$error)
-{
-  $pdo = new PDO($dsn);
-  $result = $pdo -> exec($sql);
+    if($sql === false)
+      $error = 'Cannot find SQL file.';
+  }
 
-  if($result === false)
-    $error = 'Could not run SQL: ' . print_r($pdo -> errorInfo(), true);
-}
+  // Connect to the new DB and try to run the SQL commands
+  if(!$error)
+  {
+    $pdo = getPDO();
+    $result = $pdo -> exec($sql);
 
-// See how many rows we created, if any
-$count = null;
-if(!$error)
-{
-  $sql = "SELECT COUNT(*) AS c FROM post;";
-  $stmt = $pdo -> query($sql);
+    if($result === false)
+      $error = 'Could not run SQL: ' . print_r($pdo -> errorInfo(), true);
+  }
 
-  if($stmt)
-    $count = $stmt -> fetchColumn();
-}
+  // See how many rows we created, if any
+  $count = null;
+  if(!$error)
+  {
+    $sql = "SELECT COUNT(*) AS c FROM post;";
+    $stmt = $pdo -> query($sql);
+
+    if($stmt)
+      $count = $stmt -> fetchColumn();
+  }
  ?>
 
 
