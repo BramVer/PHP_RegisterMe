@@ -48,6 +48,7 @@
             <tr>
               <td><?php echo htmlEscape($p['title']) ?></td>
               <td><?php echo convertSqlDate($p['created_at']) ?></td>
+              <td><?php echo $p['comment_count'] ?></td>
               <td><a href='edit-post.php?post_id=<?php echo $p['id'] ?>'>Edit me</a></td>
               <td><input type='submit' name='delete-post[<?php echo $p["id"] ?>]' value='Delete'/></td>
             </tr>
