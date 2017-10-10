@@ -15,6 +15,19 @@ CREATE TABLE user (
     is_enabled BOOLEAN NOT NULL DEFAULT true
 );
 
+/* This will become user = 1. I'm creating this just to satisfy constraints here.
+   The password will be properly hashed in the installer */
+INSERT INTO user (
+		username,
+    password,
+    created_at,
+    is_enabled
+) VALUES (
+		"admin",
+    "HENLOFRENDO",
+    datetime('now', '-3 months'),
+    0
+);
 
 DROP TABLE IF EXISTS post;
 
