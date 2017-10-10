@@ -18,16 +18,22 @@
   $errors = null;
   if($_POST)
   {
-    $commentData = array(
-      'name' => $_POST['comment-name'],
-      'website' => $_POST['comment-website'],
-      'text' => $_POST['comment-text'],
-    );
+    switch($_GET['action'])
+    {
+      case 'add-comment':
+        $commentData = array(
+          'name' => $_POST['comment-name'],
+          'website' => $_POST['comment-website'],
+          'text' => $_POST['comment-text'],
+        );
+        $errors = handleAddComment($pdo, $postID, $commentData);
+        break;
 
-    $errors = addCommentToPost($pdo, $postID, $commentData);
-
-    if(!$errors)
-      redirectAndExit('view-post.php?post_id=' . $postID);
+      case 'delete-comment':
+        $deleteResponse = $_POST['delete-comment'];
+        handleDeleteComment($pdo, $postID, $deleteResponse);
+        break;
+    }
   }
   else
   {

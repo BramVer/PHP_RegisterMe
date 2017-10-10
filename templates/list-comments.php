@@ -5,7 +5,9 @@
  */
 ?>
 
-<div class='comment-list'>
+<form method='POST'
+      action='view-post.php?action=delete-comment&amp;post_id=<?php echo $postID ?>&amp;'
+      class='comment-list'>
   <h3><?php echo countCommentsForPost($pdo, $postID) ?> comments</h3>
 
   <?php foreach(getCommentsForPost($pdo, $postID) as $comment) ?>
