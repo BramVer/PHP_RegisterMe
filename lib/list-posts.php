@@ -9,7 +9,7 @@
  * @return boolean Returns true on successful deletion
  * @throws Exception
  */
-function deletePost(PDO $pdo, integer $postID, )
+function deletePost(PDO $pdo, $postID)
 {
   $sqls = array(
     'DELETE FROM comment WHERE post_id = :id',  // Deletes comments

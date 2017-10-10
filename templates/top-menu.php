@@ -17,4 +17,3 @@
         <?php endif ?>
     </div>
 </div>
-<a href="index.php">

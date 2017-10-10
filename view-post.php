@@ -10,6 +10,7 @@
   // Connect to DB
   $pdo = getPDO();
   $row = getPostRow($pdo, $postID);
+  $commentCount = $row['comment_count'];
 
   // If no post exists, redirectAndExit()
   if(!$row)
@@ -67,7 +68,7 @@
            <?php // This is already escaped, so doesn't need further escaping ?>
            <?php echo convertNewlinesToParagraphs($row['body']) ?>
        </div>
-        <?php require 'templates/comment-list.php' ?>
+        <?php require 'templates/list-comments.php' ?>
         <?php require 'templates/comment-form.php' ?>
     </body>
 </html>

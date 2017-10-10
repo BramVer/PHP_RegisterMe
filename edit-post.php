@@ -41,7 +41,7 @@
     if(!$errors)
     {
       if($postID)
-        editPost($pdo, $title, $postID);
+        editPost($pdo, $title, $body, $postID);
       else
       {
         $userID = getAuthUserID($pdo);
@@ -54,15 +54,6 @@
 
     if(!$errors)
       redirectAndExit('edit-post.php?post_id=' . $postID);
-  }
-  elseif (isset($_GET['post_id']))
-  {
-    $post = getPostRow($pdo, $_GET['post_id']);
-    if($post)
-    {
-      $title = $post['title'];
-      $body = $post['body'];
-    }
   }
 ?>
 
@@ -84,7 +75,7 @@
     <?php if ($errors): ?>
       <div class='error box'>
         <ul>
-          <?php foreah($errors as $e): ?>
+          <?php foreach($errors as $e): ?>
             <li><?php echo $e ?></li>
           <?php endforeach ?>
         </ul>
@@ -105,6 +96,8 @@
 
       <div>
         <input type='submit' value='Save post'/>
+      </div>
+      <div>
         <a href='index.php'>Cancel</a>
       </div>
     </form>
