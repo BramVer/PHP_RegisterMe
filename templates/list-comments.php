@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @var PDO $pdo
  * @var integer $postID
@@ -16,6 +15,12 @@
         <?php echo htmlEscape($comment['name']) ?>
         on
         <?php echo convertSqlDate($comment['created_at']) ?>
+
+        <!-- Allow deletion for authorised users -->
+        <?php if(isLoggedIn()): ?>
+          <input type='submit' name='delete-comment[<?php echo $comment["id"] ?>]' value='Delete'/>
+        <?php endif ?>
+
       </div>
       <div class='comment-body'>
         <!-- Next line is already escaped, no need to do so again -->
