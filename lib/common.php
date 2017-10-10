@@ -39,6 +39,26 @@ function getPDO()
 }
 
 /**
+ * Gets a list of posts in reverse order
+ *
+ * @param PDO $pdo
+ * @return array
+ */
+function getAllPosts(PDO $pdo)
+{
+    $stmt = $pdo -> query(
+      "SELECT id, title, created_at, body
+      FROM post
+      ORDER BY created_at DESC"
+    );
+
+    if($stmt === false)
+      throw new Exception('Problem running the query.');
+
+    return $stmt -> fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
  * Escapes HTML so it is safe to output
  *
  * @param string $html

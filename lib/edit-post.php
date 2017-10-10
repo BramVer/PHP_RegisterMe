@@ -27,4 +27,28 @@
     return $pdo -> lastInsertID();
   }
 
+  function editPost(PDO $pdo, $title, $body, $postID)
+  {
+    $sql = 'UPDATE post
+            SET
+              title = :title,
+              body = :body
+            WHERE id = :post_id';
+    $stmt = $pdo -> prepare($sql);
+    if($stmt === false)
+      throw new Exception('Could not prepare post update query.');
+
+    $result = $stmt -> execute(
+      array(
+        'title' => $title,
+        'body' => $body,
+        'post_id' => $postID,
+      )
+    );
+    if($result === false)
+      throw new Exception('Could not run post update query.');
+
+    return true;
+  }
+
 ?>
