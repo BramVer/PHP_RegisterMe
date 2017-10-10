@@ -47,7 +47,7 @@ function getPDO()
 function getAllPosts(PDO $pdo)
 {
     $stmt = $pdo -> query(
-      "SELECT id, title, created_at, body, 
+      "SELECT id, title, created_at, body,
           (SELECT COUNT(*) FROM comment WHERE comment.post_id = post.id) comment_count
       FROM post
       ORDER BY created_at DESC"
@@ -95,27 +95,6 @@ function convertNewLinesToParagraphs($text)
 }
 
 /**
- * Returns the number of comments for the specified post
- *
- * @param PDO $pdo
- * @param integer $postId
- * @return integer
- */
-function countCommentsForPost(PDO $pdo, $postID)
-{
-  $sql = "SELECT COUNT(*) c
-          FROM comment
-          WHERE post_id = :postid";
-
-  $stmt = $pdo -> prepare($sql);
-  $stmt -> execute(
-    array('post_id' => $postID, )
-  );
-
-  return (int) $stmt -> fetchColumn();
-}
-
-/**
  * Returns all the comments for the specified post
  *
  * @param PDO $pdo
@@ -153,7 +132,8 @@ function tryLogin(PDO $pdo, $username, $password)
 {
   $sql = "SELECT password
           FROM user
-          WHERE username = :username";
+          WHERE username = :username
+          AND is_enabled = 1";
 
   $stmt = $pdo -> prepare($sql);
   $stmt -> execute(
@@ -209,7 +189,7 @@ function getAuthUserID(PDO $pdo)
   if(!isLoggedIn())
     return null;
 
-  $sql = 'SELECT id FROM user WHERE username = :username';
+  $sql = 'SELECT id FROM user WHERE username = :username AND is_enabled = 1';
   $stmt = $pdo -> prepare($sql);
   $stmt -> execute(
     array('username' => getAuthUser(), )

@@ -42,11 +42,23 @@
 
     <form method='POST'>
       <table id='post-list'>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Creation date</th>
+            <th>Comments</th>
+            <th/>
+            <th/>
+        </thead>
         <tbody>
 
           <?php foreach($posts as $p): ?>
             <tr>
-              <td><?php echo htmlEscape($p['title']) ?></td>
+              <td>
+                <a href='view-post.php?post_id=<?php echo $p["id"]?>'>
+                  <?php echo htmlEscape($p['title']) ?>
+                </a>
+              </td>
               <td><?php echo convertSqlDate($p['created_at']) ?></td>
               <td><?php echo $p['comment_count'] ?></td>
               <td><a href='edit-post.php?post_id=<?php echo $p['id'] ?>'>Edit me</a></td>

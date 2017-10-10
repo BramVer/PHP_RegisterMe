@@ -47,9 +47,17 @@
 
     <p>Login here:</p>
 
-    <form method='POST'>
-      <p>Username: <input type='text' name='username' value='<?php echo htmlEscape($username) ?>'/></p>
-      <p>Password: <input type='password' name='password'/></p>
+    <form method='POST' class='user-form'>
+      <div>
+        <label for='username'>Username:
+          <input type='text' id='username' name='username' value='<?php echo htmlEscape($username) ?>'/>
+        </label>
+      </div>
+      <div>
+        <label for='password'>Password:
+          <input type='password' id='password' name='password'/>
+        </label>
+      </div>
 
       <input type='submit' name='submit' value='login'/>
     </form>
