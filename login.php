@@ -8,6 +8,9 @@
 
   session_start();
 
+  if(isLoggedIn())
+    redirectAndExit('index.php');
+
   // Handle form posting
   $username = '';
   if($_POST)
