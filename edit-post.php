@@ -13,6 +13,18 @@
   $title = $body = '';
   $pdo = getPDO();
 
+  $postID = null;
+  if(isset($_GET['post_id']))
+  {
+    $post = getPostRow($pdo, $_GET['post_id']);
+    if($post)
+    {
+      $postID = $_GET['post_id'];
+      $title = $post['title'];
+      $body = $post['body'];
+    }
+  }
+
   // Handle POST operation
   $errors = array();
   if($_POST)
@@ -28,16 +40,16 @@
 
     if(!$errors)
     {
-      $userID = getAuthUserID($pdo);
-      $postID = addPost(
-        $pdo,
-        $title,
-        $body,
-        $userID
-      );
+      if($postID)
+        editPost($pdo, $title, $postID);
+      else
+      {
+        $userID = getAuthUserID($pdo);
+        $postID = addPost($pdo, $title, $body, $userID);
 
-      if($postID === false)
-        $errors[] = 'Post operation failed.';
+        if($postID === false)
+          $errors[] = 'Post operation failed.';
+      }
     }
 
     if(!$errors)
