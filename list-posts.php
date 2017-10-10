@@ -1,11 +1,27 @@
 <?php
 
-require_once 'lib/common.php';
+  require_once 'lib/common.php';
+  require_once 'lib/list-posts.php';
 
-session_start();
+  session_start();
 
-if(!isLoggedIn())
-  redirectAndExit('index.php');
+  if(!isLoggedIn())
+    redirectAndExit('index.php');
+
+  if($_POST)
+  {
+    $deleteResponse = $_POST['delete-post'];
+    if($deleteResponse)
+    {
+      $keys = array_keys($deleteResponse);
+      $deletePostID = $keys[0];
+      if($deletePostID)
+      {
+        deletePost(getPDO(), $deletePostID);
+        redirectAndExit('list-posts.php');
+      }
+    }
+  }
 
   $pdo = getPDO();
   $posts = getAllPosts($pdo);
@@ -22,6 +38,7 @@ if(!isLoggedIn())
     <?php require 'templates/top-menu.php' ?>
 
     <h1>Post list</h1>
+    <p>You have <?php echo count($posts) ?> posts.</p>
 
     <form method='POST'>
       <table id='post-list'>
