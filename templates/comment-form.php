@@ -19,7 +19,7 @@
 
 <h3>Add your comment</h3>
 
-<form method='POST' class='comment-form'>
+<form method='POST' class='comment-form user-form'>
   <div>
     <label for='comment-name'>
       Name:
